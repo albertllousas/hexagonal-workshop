@@ -54,11 +54,11 @@ Code ready for the change, but how we can do it without breaking our domain?:
 
 1. Create a new class `MembershipHttpClient` that will be responsible for fetching the membership data in `src/hexagonal/infra/outbound`.
 ```kotlin
-class MembershipHttpClient() : MembershipFetcher {
-    override fun fetchMembership(userId: UUID): MembershipDto {
-        // Call the new external system and return the membership
-    }
+class MembershipHttpClient() {
+    override fun fetchMembership(userId: UUID): MembershipDto =
+         MembershipDto(id = UUID.randomUUID(), name = MembershipName.BASIC, features = listOf("feature1", "feature2"))
 }
+
 data class MembershipDto(val id: UUID, val name: MembershipName, val features: List<String>)
 
 enum class MembershipName { BASIC, PREMIUM }

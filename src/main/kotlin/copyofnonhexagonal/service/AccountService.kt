@@ -2,7 +2,7 @@ package copyofnonhexagonal.service
 
 import copyofnonhexagonal.clients.MembershipLevel.BASIC
 import copyofnonhexagonal.clients.MembershipLevel.PREMIUM
-import copyofnonhexagonal.clients.UserDTO
+import copyofnonhexagonal.clients.UserDto
 import copyofnonhexagonal.clients.UserHttpClient
 import copyofnonhexagonal.controller.CreateAccountHttpRequest
 import copyofnonhexagonal.persistence.AccountDao
@@ -23,7 +23,7 @@ class AccountService(
         return newAccount.id
     }
 
-    private fun buildAccountDto(name: String, user: UserDTO) =
+    private fun buildAccountDto(name: String, user: UserDto) =
         SomeOrmAccountDto(
             id = UUID.randomUUID(),
             userId = user.id,

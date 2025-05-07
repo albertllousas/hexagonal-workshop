@@ -8,11 +8,20 @@ GET {MEMBERSHIP_HOST}/v2/{user_id}/memberships -> { "id": "string", "name": BASI
 ```
 
 Where do we start? 
-- Changing the current UserHttpClient?
-- Introducing the new MembershipHttpClient?
-- Changing our service and domain?
+1. Create a new class `MembershipHttpClient` that will be responsible for fetching the membership data in `src/main/kotlin/nonhexagonal/clients`.
+```kotlin
+class MembershipHttpClient() : MembershipFetcher {
+    override fun fetchMembership(userId: UUID): MembershipDto =
+        MembershipDto(id = UUID.randomUUID(), name = MembershipName.BASIC, features = listOf("feature1", "feature2"))
+}
+data class MembershipDto(val id: UUID, val name: MembershipName, val features: List<String>)
 
-Don't code it, just try to calculate how many changes we need to do here, painful right?
+enum class MembershipName { BASIC, PREMIUM }
+```
+2. Open `UserHttpClient` file and remove field `membership` from `UserDto`.
+3. Open `AccountService` file and add the `MembershipHttpClient` as a new constructor dependency.
+4. Try to fix the compilation errors.
+5. How many changes? painful right?
 
 As we can see, tech usually changes more often than our business part, and the ripple effect of these changes can be really
 intrusive.
