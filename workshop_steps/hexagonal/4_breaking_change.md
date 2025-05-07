@@ -89,10 +89,8 @@ class CompositeUserFetcherAdapter(
 4. We have done a lot of changes, right? But did we change our domain? No, we just changed the implementation of the `UserFetcher` interface.
 
 ## What did we do here?
-
-emember 
-
-As the previous example, we have applied dependency inversion, proving that **even breaking changes can be transparent to our domain**.
+ 
+As the previous example, we have applied dependency inversion, proving that **even breaking changes can be transparent to our domain** unlike the non-hexa code by which the ripple effect broke our code everywhere.
 
 ```
                 BUSINESS CORE                                 INFRASTRUCTURE
@@ -108,4 +106,4 @@ As the previous example, we have applied dependency inversion, proving that **ev
 
 ```
 
-Now, let's see how we can mitigate this pain with [hexagonal architecture](/workshop_steps/hexagonal/1_basic_structure.md).
+BONUS: 
