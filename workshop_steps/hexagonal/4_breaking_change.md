@@ -12,9 +12,9 @@ GET {MEMBERSHIP_HOST}/v2/{user_id}/memberships -> { "id": "string", "name": BASI
 
 Where do we start?
 
-Preparing the code with hexa, following the same thing as the previous step, we will create a port in our domain:
+Follow the same thing as the previous step:
 
-1. Create an interface `UserFetcher` and the `User` in the same file `src/main/kotlin/hexagonal/domain/UserFetcher.kt` that will be responsible for fetching the user data.
+1. Create an interface `UserFetcher` (outbound port) and the `User` in the same file `src/main/kotlin/hexagonal/domain/UserFetcher.kt` that will be responsible for fetching the user data.
 ```kotlin
 interface UserFetcher {
     fun fetchUser(id: UUID): User
