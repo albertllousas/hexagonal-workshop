@@ -44,7 +44,10 @@ We just did the most important thing in hexagonal architecture, apply [dependenc
 +----------------+        +-------------------+           +------------+
 ```
 
-Now our infrastructure code depends on our domain, and not the other way around.
+Now our infrastructure code for the database depends on our domain, and not the other way around, this mitigates most of the
+changes in our db, like changes in the schema or ORMs. 
+
+**Our business code is free of database concerns 😱.**
 
 Let's keep changing stuff, [third change](/workshop_steps/hexagonal/4_breaking_change.md). 
 

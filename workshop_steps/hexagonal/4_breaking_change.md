@@ -24,10 +24,11 @@ data class User(val id: UUID, val name: String, val email: String, val membershi
 
 enum class Membership { BASIC, PREMIUM }
 ```
-2. Replace the dependency of `UserHttpClient` in the `AccountService` with the new interface `UserFetcher`. Replace aswell the `UserDto` in the service by the User domain class that we just created.
+2. Open `AccountService` and replace the dependency of `UserHttpClient` by the new interface `UserFetcher`. Replace the `UserDto` references by the `User` domain class.
 3. Fix compilation issues and remove unused packages from infra.
-4. Implement the `UserFetcher` interface in the `UserHttpClient` class.
-5. Optional: Now that we are free of infrastructure dtos in the Service, we can safely move the logic (buildAccount) to the domain class `Account`. 
+4. Open `UserHttpClient` and force it to implement the `UserFetcher` interface.
+5. Fix the code
+6Optional: Now that we are free of infrastructure dtos in the Service, we can safely move the logic (buildAccount) to the domain class `Account`. 
 Why? we don't want anemic domains, we want rich ones if we want to follow OOP.
 ```kotlin
 data class Account(...) {
@@ -50,12 +51,13 @@ data class Account(...) {
 
 ## Tech change
 
-Code ready for the change, but how we can do it without breaking our domain?:
+The code is hexa-ready, let's do the tech change:
 
 1. Create a new class `MembershipHttpClient` that will be responsible for fetching the membership data in `src/hexagonal/infra/outbound`.
 ```kotlin
 class MembershipHttpClient() {
     override fun fetchMembership(userId: UUID): MembershipDto =
+        // Simulate fetching membership data from an external service
          MembershipDto(id = UUID.randomUUID(), name = MembershipName.BASIC, features = listOf("feature1", "feature2"))
 }
 
@@ -63,12 +65,14 @@ data class MembershipDto(val id: UUID, val name: MembershipName, val features: L
 
 enum class MembershipName { BASIC, PREMIUM }
 ```
-2. Unimplement the `UserFetcher` interface in the `UserHttpClient` class, returning back the dto again, now without `membership` field.
+2. Unimplement the `UserFetcher` interface in the `UserHttpClient` class, returning back the dto again (UserDto), now without `membership` field.
 ```kotlin
-TODO
+class UserHttpClient {
+    fun fetchUser(userId: UUID): UserDto { ... }
+}
 ```
-3. Create a new class `CompositeUserFetcherAdapter` that will implement `UserFetcher` interface and will be responsible for call the user client, 
-cal the membership client and merge it in our domain class in `src/hexagonal/infra/outbound`.
+3. Create a new class `src/hexagonal/infra/outbound/CompositeUserFetcherAdapter` that will implement `UserFetcher` interface and will be responsible for call the user client, 
+call the membership client and merge it in our domain class.
 
 ```kotlin
 class CompositeUserFetcherAdapter(
@@ -77,8 +81,8 @@ class CompositeUserFetcherAdapter(
 ) : UserFetcher {
     override fun fetchUser(id: UUID): User {
         val user = userHttpClient.fetchUser(id)
-        val membership = membershipHttpClient.fetchMembership(user.id)
-        return User(user.id, user.name, user.email, Membership.valueOf(membership.name))
+        val membership = membershipHttpClient.fetchMembership(id)
+        return User(id, user.name, user.email, Membership.valueOf(membership.name))
     }
 }
 ```
@@ -86,7 +90,9 @@ class CompositeUserFetcherAdapter(
 
 ## What did we do here?
 
-As the previous example, we have applied dependency inversion, proving that even breaking changes can be transparent to our domain.
+emember 
+
+As the previous example, we have applied dependency inversion, proving that **even breaking changes can be transparent to our domain**.
 
 ```
                 BUSINESS CORE                                 INFRASTRUCTURE

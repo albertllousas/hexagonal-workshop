@@ -12,6 +12,7 @@ Where do we start?
 ```kotlin
 class MembershipHttpClient() : MembershipFetcher {
     override fun fetchMembership(userId: UUID): MembershipDto =
+        // Simulate fetching membership data from an external service
         MembershipDto(id = UUID.randomUUID(), name = MembershipName.BASIC, features = listOf("feature1", "feature2"))
 }
 data class MembershipDto(val id: UUID, val name: MembershipName, val features: List<String>)
@@ -23,7 +24,7 @@ enum class MembershipName { BASIC, PREMIUM }
 4. Try to fix the compilation errors.
 5. How many changes? painful right?
 
-As we can see, tech usually changes more often than our business part, and the ripple effect of these changes can be really
-intrusive.
+As we can see, **tech usually changes more often than our business part, and the ripple effect of these changes can be really
+intrusive.**
 
 Now, let's see how we can mitigate this pain with [hexagonal architecture](/workshop_steps/hexagonal/1_basic_structure.md).

@@ -5,9 +5,9 @@ import java.util.UUID
 // fake class to simulate an HTTP client
 class UserHttpClient {
 
-    fun fetchUser(userId: UUID): UserDto {
-        return UserDto(id = userId, name = "John Doe", email = "john.doe@gmail.com", membership = MembershipLevel.PREMIUM)
-    }
+    fun fetchUser(userId: UUID): UserDto  =
+        // Simulate fetching user data from an external service
+        UserDto(id = userId, name = "John Doe", email = "john.doe@gmail.com", membership = MembershipLevel.PREMIUM)
 }
 
 data class UserDto(
