@@ -9,7 +9,7 @@ A field in the request changes from `accountName` to `name`.
 4. Check how many classes are impacted by this change, keep in mind that even though we don’t have tests here, they would reflect the same changes—so the actual number would effectively double.
 5. Fix the code, and make sure the project compiles
 
-Well, that was easy, let's move on to the [next change](/workshop_steps/feel_the_pain/2_database_type_change.mdtype_change.md). 
+Well, that was easy, let's move on to the [next change](/workshop_steps/feel_the_pain/2_database_type_change.md). 
 
 
 
