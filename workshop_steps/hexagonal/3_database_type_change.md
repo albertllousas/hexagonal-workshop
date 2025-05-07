@@ -34,7 +34,7 @@ and implement the interface and remove the old method.
 
 ## What did we do here?
 
-We just did the most important thing in hexagonal architecture, dependency inversion, now we have:
+We just did the most important thing in hexagonal architecture, apply [dependency inversion principle](https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html), now we have:
 
 ```
                 BUSINESS CORE                             INFRASTRUCTURE 
