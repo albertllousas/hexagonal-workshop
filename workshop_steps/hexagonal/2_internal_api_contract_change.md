@@ -17,8 +17,8 @@ But before that, let's prepare our codebase, how we can shell our service from t
 
 1. Open `src/main/kotlin/hexagonal/infra/inbound/AccountController.kt`
 2. Change the `accountName` field in the `CreateAccountHttpRequest` class to `name` (Remember, without using rename from IDE)
-3. Compile the project 
-4. No changes right? 
+3. Fix compilation issues 
+4. No changes in the business side, right? 
 5. Optional: Rename `AccountController` to `AccountHttpAdapter` to be more clear with hexagonal concepts.
 
 ## What did we do here?
