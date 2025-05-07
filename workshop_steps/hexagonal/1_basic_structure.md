@@ -6,7 +6,7 @@ But first, let's prepare our codebase.
 
 1. Rename, this time using the IDEA refactoring capabilities, the `copyofnonhexagonal` package to `hexagonal`.
 2. Create the basic package structure of the hexagonal architecture project:
-```shell
+```text
  hexagonal
     ├── application // Usecases or services, orchestrators
     ├── domain // Domain model, ports
