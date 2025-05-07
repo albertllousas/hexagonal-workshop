@@ -21,7 +21,7 @@ interface AccountRepository {
 }
 ```
 3. Once we have this abstraction, open `src/main/kotlin/hexagonal/application/AccountService.kt` and replace the dependency of
-AccountDao by the new interface `AccountRepository` we just created. Please, don't use the account dto in the service, use the domain class `Account` instead.
+AccountDao by the new interface `AccountRepository` we just created. Please, don't use the account dtos in the service, use the domain class `Account` and `BillingType` instead.
 4. Fix the compilation errors and remove import from infra packages.
 5. We are almost there, now someone needs to implement this interface, right? open `src/main/kotlin/hexagonal/infra/outbound/AccountDao.kt`
 and implement the interface and remove the old method.
