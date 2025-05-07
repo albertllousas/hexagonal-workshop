@@ -46,5 +46,5 @@ We just did the most important thing in hexagonal architecture, apply [dependenc
 
 Now our infrastructure code depends on our domain, and not the other way around.
 
-Let's keep changing stuff, [third change](/workshop_steps/feel_the_pain/3_technology_change.md). 
+Let's keep changing stuff, [third change](/workshop_steps/hexagonal/4_breaking_change.md). 
 
