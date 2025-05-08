@@ -8,7 +8,7 @@ A field in the request changes from `accountName` to `name`.
 But before that, let's prepare our codebase, how we can shell our service from the dto leaking that we saw before?.
 
 1. Open `src/main/kotlin/hexagonal/application/AccountService.kt`
-2. Change the input of the signature of the `createAccount` that accepts an http request to `CreateAccountHttpRequest` to just primitives `fun createAccount(userId: UUID, name: String): UUID`
+2. Change the input of the signature of the `createAccount` that accepts an http request to `CreateAccountHttpRequest` and use primitives instead `fun createAccount(userId: UUID, name: String): UUID`
 3. Open `src/main/kotlin/hexagonal/infra/inbound/AccountController.kt`
 4. Change the `createAccount` and pass the correct parameters to the service.
 5. Compile the project
