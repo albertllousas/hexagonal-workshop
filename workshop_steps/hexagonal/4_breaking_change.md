@@ -106,4 +106,5 @@ As the previous example, we have applied dependency inversion, proving that **ev
 
 ```
 
-BONUS: 
+Well, now, if you still want to code more, we can do a bonus, this time without guidance: [Bonus](/workshop_steps/hexagonal/5_bonus.md).
+ 
