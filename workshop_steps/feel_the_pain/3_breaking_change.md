@@ -4,7 +4,7 @@ The external user system has been split. Membership-related fields are deprecate
 
 ```
 GET {USERS_HOST}/v2/users/{id} -> { "id": "string", "name": "string", "email": "string" }
-GET {MEMBERSHIP_HOST}/v2/{user_id}/memberships -> { "id": "string", "name": BASIC|PREMIUM, "features": ["string"] }
+GET {MEMBERSHIP_HOST}/v1/{user_id}/memberships -> { "id": "string", "name": BASIC|PREMIUM, "features": ["string"] }
 ```
 
 Where do we start? 

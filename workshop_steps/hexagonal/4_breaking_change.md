@@ -5,7 +5,7 @@ Membership-related fields are deprecated and now handled by a new external membe
 
 ```
 GET {USERS_HOST}/v2/users/{id} -> { "id": "string", "name": "string", "email": "string" }
-GET {MEMBERSHIP_HOST}/v2/{user_id}/memberships -> { "id": "string", "name": BASIC|PREMIUM, "features": ["string"] }
+GET {MEMBERSHIP_HOST}/v1/{user_id}/memberships -> { "id": "string", "name": BASIC|PREMIUM, "features": ["string"] }
 ```
 
 ## Preparing the code with hexagonal
@@ -26,9 +26,10 @@ enum class Membership { BASIC, PREMIUM }
 ```
 2. Open `AccountService` and replace the dependency of `UserHttpClient` by the new interface `UserFetcher`. Replace the `UserDto` references by the `User` domain class.
 3. Fix compilation issues and remove unused packages from infra.
-4. Open `UserHttpClient` and force it to implement the `UserFetcher` interface.
+4. Open `UserHttpClient` and force it to implement the `UserFetcher` interface, don't implement the mapping logic, imagine that
+we get the `UserDto` and return a `User`.
 5. Fix the code
-6Optional: Now that we are free of infrastructure dtos in the Service, we can safely move the logic (buildAccount) to the domain class `Account`. 
+6. Optional: Now that we are free of infrastructure dtos in the Service, we can safely move the logic (buildAccount) to the domain class `Account`. 
 Why? we don't want anemic domains, we want rich ones if we want to follow OOP.
 ```kotlin
 data class Account(...) {
@@ -56,7 +57,7 @@ The code is hexa-ready, let's do the tech change:
 1. Create a new class `MembershipHttpClient` that will be responsible for fetching the membership data in `src/hexagonal/infra/outbound`.
 ```kotlin
 class MembershipHttpClient() {
-    override fun fetchMembership(userId: UUID): MembershipDto =
+    fun fetchMembership(userId: UUID): MembershipDto =
         // Simulate fetching membership data from an external service
          MembershipDto(id = UUID.randomUUID(), name = MembershipName.BASIC, features = listOf("feature1", "feature2"))
 }
@@ -82,7 +83,7 @@ class CompositeUserFetcherAdapter(
     override fun fetchUser(id: UUID): User {
         val user = userHttpClient.fetchUser(id)
         val membership = membershipHttpClient.fetchMembership(id)
-        return User(id, user.name, user.email, Membership.valueOf(membership.name))
+        return User(id, user.name, user.email, Membership.valueOf(membership.name.name))
     }
 }
 ```
