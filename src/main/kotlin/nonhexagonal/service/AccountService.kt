@@ -6,8 +6,6 @@ import nonhexagonal.clients.UserDto
 import nonhexagonal.clients.UserHttpClient
 import nonhexagonal.controller.CreateAccountHttpRequest
 import nonhexagonal.persistence.AccountDao
-import nonhexagonal.persistence.OrmBillingType.MONTHLY
-import nonhexagonal.persistence.OrmBillingType.YEARLY
 import nonhexagonal.persistence.SomeOrmAccountDto
 import java.util.UUID
 
@@ -30,8 +28,8 @@ class AccountService(
             accountName = name,
             email = user.email,
             billingType = when (user.membership) {
-                BASIC -> MONTHLY
-                PREMIUM -> YEARLY
+                BASIC -> 0
+                PREMIUM -> 1
             }
         )
 }

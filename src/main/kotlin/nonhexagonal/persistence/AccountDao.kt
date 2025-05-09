@@ -16,7 +16,5 @@ class SomeOrmAccountDto(
     val userId: UUID,
     val accountName: String,
     val email: String,
-    val billingType: OrmBillingType
+    val billingType: Int
 )
-
-enum class OrmBillingType { MONTHLY, YEARLY }
