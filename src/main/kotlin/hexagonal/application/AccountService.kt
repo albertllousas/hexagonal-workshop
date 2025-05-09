@@ -1,6 +1,5 @@
 package hexagonal.application
 
-import hexagonal.infra.inbound.CreateAccountHttpRequest
 import hexagonal.infra.outbound.AccountDao
 import hexagonal.infra.outbound.MembershipLevel
 import hexagonal.infra.outbound.OrmBillingType
@@ -14,9 +13,9 @@ class AccountService(
     private val accountDao: AccountDao,
 ) {
 
-    fun createAccount(request: CreateAccountHttpRequest): UUID {
-        val user = userHttpClient.fetchUser(request.userId)
-        val newAccount = buildAccountDto(request.accountName, user)
+    fun createAccount(userId: UUID, accountName: String): UUID {
+        val user = userHttpClient.fetchUser(userId)
+        val newAccount = buildAccountDto(accountName, user)
         accountDao.insert(newAccount)
         return newAccount.id
     }
