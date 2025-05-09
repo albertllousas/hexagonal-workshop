@@ -1,6 +1,6 @@
-package copyofnonhexagonal.controller
+package hexagonal.infra.inbound
 
-import copyofnonhexagonal.service.AccountService
+import hexagonal.application.AccountService
 import java.util.UUID
 
 // fake class to simulate a controller

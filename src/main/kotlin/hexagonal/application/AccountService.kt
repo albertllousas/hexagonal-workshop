@@ -1,14 +1,12 @@
-package copyofnonhexagonal.service
+package hexagonal.application
 
-import copyofnonhexagonal.clients.MembershipLevel.BASIC
-import copyofnonhexagonal.clients.MembershipLevel.PREMIUM
-import copyofnonhexagonal.clients.UserDto
-import copyofnonhexagonal.clients.UserHttpClient
-import copyofnonhexagonal.controller.CreateAccountHttpRequest
-import copyofnonhexagonal.persistence.AccountDao
-import copyofnonhexagonal.persistence.OrmBillingType.MONTHLY
-import copyofnonhexagonal.persistence.OrmBillingType.YEARLY
-import copyofnonhexagonal.persistence.SomeOrmAccountDto
+import hexagonal.infra.inbound.CreateAccountHttpRequest
+import hexagonal.infra.outbound.AccountDao
+import hexagonal.infra.outbound.MembershipLevel
+import hexagonal.infra.outbound.OrmBillingType
+import hexagonal.infra.outbound.SomeOrmAccountDto
+import hexagonal.infra.outbound.UserDto
+import hexagonal.infra.outbound.UserHttpClient
 import java.util.UUID
 
 class AccountService(
@@ -30,8 +28,8 @@ class AccountService(
             accountName = name,
             email = user.email,
             billingType = when (user.membership) {
-                BASIC -> MONTHLY
-                PREMIUM -> YEARLY
+                MembershipLevel.BASIC -> OrmBillingType.MONTHLY
+                MembershipLevel.PREMIUM -> OrmBillingType.YEARLY
             }
         )
 }

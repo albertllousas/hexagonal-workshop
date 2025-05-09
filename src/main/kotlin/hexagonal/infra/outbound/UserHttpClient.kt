@@ -1,4 +1,4 @@
-package copyofnonhexagonal.clients
+package hexagonal.infra.outbound
 
 import java.util.UUID
 
