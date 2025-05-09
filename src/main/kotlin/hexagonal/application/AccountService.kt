@@ -3,33 +3,33 @@ package hexagonal.application
 import hexagonal.domain.Account
 import hexagonal.domain.AccountRepository
 import hexagonal.domain.BillingType
-import hexagonal.infra.outbound.MembershipLevel
-import hexagonal.infra.outbound.UserDto
-import hexagonal.infra.outbound.UserHttpClient
+import hexagonal.domain.Membership
+import hexagonal.domain.User
+import hexagonal.domain.UserFetcher
 import java.util.UUID
 
 class AccountService(
-    private val userHttpClient: UserHttpClient,
+    private val userFetcher: UserFetcher,
     private val repository: AccountRepository,
 ) {
 
     fun createAccount(userId: UUID, accountName: String): UUID {
-        val user = userHttpClient.fetchUser(userId)
+        val user = userFetcher.fetchUser(userId)
         val newAccount = buildAccount(accountName, user)
         repository.save(newAccount)
         return newAccount.id
     }
 
 
-    private fun buildAccount(name: String, user: UserDto) =
+    private fun buildAccount(name: String, user: User) =
         Account(
             id = UUID.randomUUID(),
             userId = user.id,
             name = name,
             email = user.email,
             billingType = when (user.membership) {
-                MembershipLevel.BASIC -> BillingType.MONTHLY
-                MembershipLevel.PREMIUM -> BillingType.YEARLY
+                Membership.BASIC -> BillingType.MONTHLY
+                Membership.PREMIUM -> BillingType.YEARLY
             }
         )
 }

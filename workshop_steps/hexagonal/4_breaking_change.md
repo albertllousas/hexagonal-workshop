@@ -5,7 +5,7 @@ Membership-related fields are deprecated and now handled by a new external membe
 
 ```
 GET {USERS_HOST}/v2/users/{id} -> { "id": "string", "name": "string", "email": "string" }
-GET {MEMBERSHIP_HOST}/v2/{user_id}/memberships -> { "id": "string", "name": BASIC|PREMIUM, "features": ["string"] }
+GET {MEMBERSHIP_HOST}/v1/{user_id}/memberships -> { "id": "string", "name": BASIC|PREMIUM, "features": ["string"] }
 ```
 
 ## Preparing the code with hexagonal
@@ -107,4 +107,3 @@ As the previous example, we have applied dependency inversion, proving that **ev
 ```
 
 Well, now, if you still want to code more, we can do a bonus, this time without guidance: [Bonus](/workshop_steps/hexagonal/5_bonus.md).
- 
