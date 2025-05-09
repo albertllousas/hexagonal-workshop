@@ -11,7 +11,7 @@ But first, let's prepare our codebase.
     ├── application // Usecases or services, orchestrators
     ├── domain // Domain model, ports
     └── infra // Adapters
-        ├── inbound // Adapters for inbound communications, e.g., controllers, http clients
+        ├── inbound // Adapters for inbound communications, e.g., controllers, kafka consumers, schedulers
         └── outbound // Adapters for outbound communications, e.g., repositories, message brokers
 ```
 3. Move the `AccountController` package to `src/main/kotlin/hexagonal/infra/inbound`
