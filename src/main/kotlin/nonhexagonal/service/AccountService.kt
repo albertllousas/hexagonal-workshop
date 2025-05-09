@@ -18,7 +18,7 @@ class AccountService(
 
     fun createAccount(request: CreateAccountHttpRequest): UUID {
         val user = userHttpClient.fetchUser(request.userId)
-        val newAccount = buildAccountDto(request.accountName, user)
+        val newAccount = buildAccountDto(request.name, user)
         accountDao.insert(newAccount)
         return newAccount.id
     }

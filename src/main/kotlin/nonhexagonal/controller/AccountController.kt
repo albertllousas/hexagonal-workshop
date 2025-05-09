@@ -14,6 +14,6 @@ class AccountController(
     }
 }
 
-data class CreateAccountHttpRequest(val userId: UUID, val accountName: String)
+data class CreateAccountHttpRequest(val userId: UUID, val name: String)
 
 data class CreateAccountHttpResponse(val accountId: UUID)
