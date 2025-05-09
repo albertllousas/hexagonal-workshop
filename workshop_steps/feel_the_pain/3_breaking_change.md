@@ -10,7 +10,7 @@ GET {MEMBERSHIP_HOST}/v2/{user_id}/memberships -> { "id": "string", "name": BASI
 Where do we start? 
 1. Create a new class `MembershipHttpClient` that will be responsible for fetching the membership data in `src/main/kotlin/nonhexagonal/clients`.
 ```kotlin
-class MembershipHttpClient() : MembershipFetcher {
+class MembershipHttpClient() {
     override fun fetchMembership(userId: UUID): MembershipDto =
         // Simulate fetching membership data from an external service
         MembershipDto(id = UUID.randomUUID(), name = MembershipName.BASIC, features = listOf("feature1", "feature2"))
