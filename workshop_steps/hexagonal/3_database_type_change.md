@@ -14,7 +14,7 @@ data class Account(val id: UUID, val userId: UUID, val name: String, val email: 
 
 enum class BillingType { MONTHLY, YEARLY }
 ```
-2. Now, create an interface `src/main/kotlin/hexagonal/domain/AccountRespository.kt` that uses our newly created domain class.
+2. Now, create an interface `src/main/kotlin/hexagonal/domain/AccountRepository.kt` that uses our newly created domain class.
 ```kotlin
 interface AccountRepository {
     fun save(account: Account): Account
