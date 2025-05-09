@@ -14,8 +14,7 @@ Demonstrate how hexagonal design:
 
 This workshop is designed in two practical and hands-on consisting in:
 - Understand the **pain** of infrastructure coupling by **making infra changes** on an existent layered architecture codebase.
-- Refactor the code to use Hexagonal Architecture principles.
-- Make the same changes to the hexagonal architecture codebase and see how architecture is mitigating the pain by protecting the domain.
+- Refactor to Hexagonal Architecture and apply the same changes to see how it protects the domain from them.
 
 ## Prerequisites
 
@@ -27,7 +26,7 @@ This workshop is designed in two practical and hands-on consisting in:
 architecture can help mitigate it. For that reason, we won’t use tests to guide the exercise (e.g., TDD), or even include
 them, as our goal is educational and tests would add unnecessary noise.
 - IDE CAPABILITIES: Please do not use the refactoring capabilities of your IDE to rename classes, methods, or variables. 
-- This is to ensure that you understand the changes being made and their implications.
+This is to ensure that you understand the changes being made and their implications.
 
 ## Let's get ready
 
